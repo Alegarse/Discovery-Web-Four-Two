@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It’s over 9000</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        #calculadora {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftOperand = document.getElementById('leftOperand');
+            const operator = document.getElementById('operator');
+            const rightOperand = document.getElementById('rightOperand');
+            const calculateButton = document.getElementById('calculateButton');
+
+            calculateButton.addEventListener('click', function() {
+                const leftValue = parseInt(leftOperand.value, 10);
+                const rightValue = parseInt(rightOperand.value, 10);
+                const selectedOperator = operator.value;
+
+                if (isNaN(leftValue) || isNaN(rightValue) || leftValue < 0 || rightValue < 0) {
+                    alert('Error :(');
+                    console.error('Error :(');
+                    return;
+                }
+
+                if ((selectedOperator === '/' || selectedOperator === '%') && rightValue === 0) {
+                    alert("It's over 9000!");
+                    console.error("It's over 9000!");
+                    return;
+                }
+
+                let result;
+                switch (selectedOperator) {
+                    case '+':
+                        result = leftValue + rightValue;
+                        break;
+                    case '-':
+                        result = leftValue - rightValue;
+                        break;
+                    case '*':
+                        result = leftValue * rightValue;
+                        break;
+                    case '/':
+                        result = leftValue / rightValue;
+                        break;
+                    case '%':
+                        result = leftValue % rightValue;
+                        break;
+                    default:
+                        alert('Error :(');
+                        console.error('Error :(');
+                        return;
+                }
+
+                alert('Resultado: ' + result);
+                console.log('Resultado:', result);
+            });
+
+            // Mostrar alerta cada 30 segundos
+            setInterval(function() {
+                alert('Please, use me...');
+            }, 30000);
+        });
+
+    </script>
+</head>
+<body>
+    <div id="calculadora">
+        <input type="text" id="leftOperand" placeholder="Número izquierdo">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="text" id="rightOperand" placeholder="Número derecho">
+        <button id="calculateButton">Try me!</button>
+    </div>  
+</body>
+</html>
